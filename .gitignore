@@ -1,3 +1,5 @@
 alertmanager/*origin.yaml
 dash
 .env
+.vscode/
+terraform.tfstate

@@ -25,6 +25,19 @@ scrape_configs:
         labels:
           alias: webserver
 
+  - job_name: nifi5_exporter
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['172.20.0.2:19992']
+        labels:
+          alias: nifi
+
+  - job_name: nifi_log_exporter
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['172.20.0.2:19994']
+        labels:
+          alias: nifi
 alerting:
   alertmanagers:
   - scheme: http
