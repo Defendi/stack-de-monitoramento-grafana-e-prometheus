@@ -42,15 +42,15 @@ services:
       app-tier:
         ipv4_address: 172.20.0.22
 
-  promtail:
-    image: grafana/promtail
-    volumes:
-      - promtail_log:/var/log
-      - ./promtail/config.yaml:/etc/promtail/config.yaml
-    command: -config.file=/etc/promtail/config.yaml
-    networks:
-      app-tier:
-        ipv4_address: 172.20.0.26
+  # promtail:
+  #   image: grafana/promtail
+  #   volumes:
+  #     - promtail_log:/var/log
+  #     - ./promtail/config.yaml:/etc/promtail/config.yaml
+  #   command: -config.file=/etc/promtail/config.yaml
+  #   networks:
+  #     app-tier:
+  #       ipv4_address: 172.20.0.26
 
   prometheus:
     image: prom/prometheus:latest
