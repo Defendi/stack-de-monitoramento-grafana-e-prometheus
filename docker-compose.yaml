@@ -3,6 +3,9 @@ version: "3.8"
 volumes:
   grafana_data:
   prometheus_data:
+  loki_data:
+  promtail_log:
+  promtail_conf:
 
 networks:
   app-tier:
@@ -27,6 +30,27 @@ services:
     networks:
       app-tier:
         ipv4_address: 172.20.0.20
+
+  loki:
+    image: grafana/loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki_data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      app-tier:
+        ipv4_address: 172.20.0.22
+
+  promtail:
+    image: grafana/promtail
+    volumes:
+      - promtail_log:/var/log
+      - ./promtail/config.yaml:/etc/promtail/config.yaml
+    command: -config.file=/etc/promtail/config.yaml
+    networks:
+      app-tier:
+        ipv4_address: 172.20.0.26
 
   prometheus:
     image: prom/prometheus:latest
